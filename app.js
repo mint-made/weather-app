@@ -1,22 +1,6 @@
 const request = require('request');
-
-// API details for MapBox and OpenWeather
-const API = {
-  ow: {
-    key: '&appid=a407e727f4ec6ff841f3469f46a5cd28',
-    base: 'http://api.openweathermap.org/data/2.5/weather?',
-    cityName: 'q=',
-    lat: 'lat=',
-    lon: 'lon=',
-  },
-  mb: {
-    key:
-      'access_token=pk.eyJ1IjoibWludC1tYWRlIiwiYSI6ImNraHRteHBwNTE0a2QycGt6ZHFtanpjdzIifQ.ZEm8gJzjR1Fo76XHOANsfw',
-    base: 'https://api.mapbox.com/',
-    geo: 'geocoding/v5/mapbox.places/',
-    limit: '&limit=1',
-  },
-};
+const API = require('./utils/keys');
+const geocode = require('./utils/geocode');
 
 // MapBox API Request
 // const mbSample = `${API.mb.base}${API.mb.geo}Bristol.json?${API.mb.key}${API.mb.limit}`;
@@ -34,29 +18,11 @@ const API = {
 //   }
 // });
 
-const geocode = (address, callback) => {
-  const encodedAddress = encodeURIComponent(address);
-  const url = `${API.mb.base}${API.mb.geo}${encodedAddress}.json?${API.mb.key}${API.mb.limit}`;
-
-  request({ url: mbSample, json: true }, (error, response) => {
-    if (error) {
-      callback('Unable to connect to the Geocoding service', undefined);
-    } else if (response.body.features.length === 0) {
-      callback('Unable to find this location', undefined);
-    } else {
-      callback(undefined, {
-        lat: response.body.features[0].center[1],
-        lon: response.body.features[0].center[0],
-      });
-    }
-  });
-};
-
-geocode('Bristol', (error, data) => {
+geocode('London', (error, data) => {
   if (error) {
     console.log(error);
   } else {
-    console.log(`Your location is: (${data.lat}, ${data.lon})`);
+    console.log(`${data.location} is found at: (${data.lat}, ${data.lon})`);
   }
 });
 
