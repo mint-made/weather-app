@@ -1,17 +1,20 @@
 const request = require('request');
-const API = require('./keys');
+const { ow } = require('./keys');
 
 const forecast = (lat, lon, callback) => {
-  const url = `${API.ow.base}${API.ow.lat}${lat}&${API.ow.lon}${lon}${API.ow.key}`;
+  const url = `${ow.base}${ow.lat}${lat}&${ow.lon}${lon}${ow.key}`;
+  console.log(url);
 
-  request({ url: url, json: true }, (error, response) => {
+  request({ url, json: true }, (error, { body }) => {
     if (error) {
       callback('Unable to connect to the weather service', undefined);
-    } else if (response.body.message) {
-      callback('Unable to find location: ' + response.body.message, undefined);
+    } else if (body.message) {
+      callback('Unable to find location: ' + body.message, undefined);
     } else {
+      //console.log(body);
       callback(undefined, {
-        temperature: (response.body.main.temp - 273.15).toFixed(2),
+        temperature: (body.main.temp - 273.15).toFixed(2),
+        location: body.name,
       });
     }
   });
