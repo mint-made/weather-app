@@ -3,7 +3,6 @@ const { ow } = require('./keys');
 
 const forecast = (lat, lon, callback) => {
   const url = `${ow.base}${ow.lat}${lat}&${ow.lon}${lon}${ow.key}`;
-  console.log(url);
 
   request({ url, json: true }, (error, { body }) => {
     if (error) {
