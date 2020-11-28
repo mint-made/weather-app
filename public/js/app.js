@@ -15,18 +15,16 @@ weatherForm.addEventListener('submit', (e) => {
   messageOne.textContent = 'Loading...';
   messageTwo.textContent = '';
 
-  fetch('http://localhost:3000/weather?address=' + location).then(
-    (response) => {
-      response.json().then(({ error, temperature, location, lat, lon }) => {
-        if (error) {
-          messageOne.textContent = error;
-          return console.log('Error: ' + error);
-        }
-        const textOne = `${location}: (${lat}, ${lon})`;
-        const textTwo = `In ${location}: It is currently ${temperature}\xB0C`;
-        messageOne.textContent = textOne;
-        messageTwo.textContent = textTwo;
-      });
-    }
-  );
+  fetch('/weather?address=' + location).then((response) => {
+    response.json().then(({ error, temperature, location, lat, lon }) => {
+      if (error) {
+        messageOne.textContent = error;
+        return console.log('Error: ' + error);
+      }
+      const textOne = `${location}: (${lat}, ${lon})`;
+      const textTwo = `In ${location}: It is currently ${temperature}\xB0C`;
+      messageOne.textContent = textOne;
+      messageTwo.textContent = textTwo;
+    });
+  });
 });
