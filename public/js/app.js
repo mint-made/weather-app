@@ -23,7 +23,7 @@ weatherForm.addEventListener('submit', (e) => {
           return console.log('Error: ' + error);
         }
         const textOne = `${location}: (${lat}, ${lon})`;
-        const textTwo = `In ${location}: It is currently ${temperature}`;
+        const textTwo = `In ${location}: It is currently ${temperature}\xB0C`;
         messageOne.textContent = textOne;
         messageTwo.textContent = textTwo;
       });
