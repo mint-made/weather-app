@@ -10,10 +10,12 @@ const forecast = (lat, lon, callback) => {
     } else if (body.message) {
       callback('Unable to find location: ' + body.message, undefined);
     } else {
-      //console.log(body);
+      console.log(body);
       callback(undefined, {
         temperature: (body.main.temp - 273.15).toFixed(2),
+        feelsLike: (body.main.feels_like - 273.15).toFixed(2),
         location: body.name,
+        iconUrl: `http://openweathermap.org/img/wn/${body.weather[0].icon}@2x.png`,
       });
     }
   });

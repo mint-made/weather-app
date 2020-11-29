@@ -53,18 +53,24 @@ app.get('/weather', (req, res) => {
     if (error) {
       return res.send({ error: error });
     }
-    forecast(lat, lon, (error, { temperature, location }) => {
-      if (error) {
-        return res.send({ error: error });
+    forecast(
+      lat,
+      lon,
+      (error, { temperature, location, feelsLike, iconUrl }) => {
+        if (error) {
+          return res.send({ error: error });
+        }
+        res.send({
+          addressQuery: req.query.address,
+          temperature,
+          location,
+          lat,
+          lon,
+          feelsLike,
+          iconUrl,
+        });
       }
-      res.send({
-        addressQuery: req.query.address,
-        temperature,
-        location,
-        lat,
-        lon,
-      });
-    });
+    );
   });
 });
 
