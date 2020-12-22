@@ -14,6 +14,6 @@ Following the submission of search data from a user, the app will geocode the da
 
 
 ### Attribution
-[mapbox-api](https://docs.mapbox.com/api/)
-[openweathermap-api](https://openweathermap.org/api)
-[The Complete Node.js Developer Course - Andrew Mead](https://www.udemy.com/course/the-complete-nodejs-developer-course-2/)
+[mapbox-api](https://docs.mapbox.com/api/)  
+[openweathermap-api](https://openweathermap.org/api)  
+[The Complete Node.js Developer Course - Andrew Mead](https://www.udemy.com/course/the-complete-nodejs-developer-course-2/)  
